@@ -24,7 +24,7 @@ class display:
         self.image = Image.new('1', (self.oled.width, self.oled.height))
 
         # Get drawing object to draw on image.
-        self.draw = ImageDraw.Draw(image)
+        self.draw = ImageDraw.Draw(self.image)
 
     def displayText(self,text,x,y):
         # Draw Some Text
@@ -37,7 +37,7 @@ class display:
         self.oled.show()
     def show(self):
         # Display image
-        self.oled.image(image)
+        self.oled.image(self.image)
         self.oled.show()
 
 def main():
