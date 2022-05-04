@@ -8,7 +8,7 @@ import adafruit_ssd1306
 class display:
     def __init__(self):
         # Define the Reset Pin
-        self.oled_reset = digitalio.DigitalInOut(board.D4)
+        oled_reset = digitalio.DigitalInOut(board.D4)
 
         # Change these
         # to the right size for your display!
@@ -16,12 +16,12 @@ class display:
         self.HEIGHT = 64  # Change to 64 if needed
 
         # Use for I2C.
-        self.i2c = board.I2C()
-        self.oled = adafruit_ssd1306.SSD1306_I2C(WIDTH, HEIGHT, i2c, addr=0x3C, reset=oled_reset)
+        i2c = board.I2C()
+        self.oled = adafruit_ssd1306.SSD1306_I2C(self.WIDTH, self.HEIGHT, i2c, addr=0x3C, reset=oled_reset)
 
         # Create blank image for drawing.
         # Make sure to create image with mode '1' for 1-bit color.
-        self.image = Image.new('1', (oled.width, oled.height))
+        self.image = Image.new('1', (self.oled.width, self.oled.height))
 
         # Get drawing object to draw on image.
         self.draw = ImageDraw.Draw(image)
