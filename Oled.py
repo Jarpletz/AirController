@@ -29,7 +29,7 @@ class display:
     def displayText(self,text,x,y):
         # Draw Some Text
         (font_width, font_height) = font.getsize(text)
-        self.draw.text((self.oled.width//2 - font_width//2, self.oled.height//2 - font_height//2),text, font=font, fill=255)
+        self.draw.text(x,y,text, font=font, fill=255)
 
     def clear(self):
         # Clear display.
@@ -37,8 +37,8 @@ class display:
         self.oled.show()
     def show(self):
         # Display image
-        oled.image(image)
-        oled.show()
+        self.oled.image(image)
+        self.oled.show()
 
 def main():
     screen=display()
