@@ -28,7 +28,8 @@ class display:
 
     def displayText(self,text,x,y):
         # Draw Some Text
-        (font_width, font_height) = font.getsize(text)
+        #(font_width, font_height) = font.getsize(text)
+        font = ImageFont.load_default()
         self.draw.text(x,y,text, font=font, fill=255)
 
     def clear(self):
