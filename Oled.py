@@ -6,7 +6,9 @@ from PIL import Image, ImageDraw, ImageFont
 import adafruit_ssd1306
 
 class display:
+
     def __init__(self):
+        print("hello")
         # Define the Reset Pin
         oled_reset = digitalio.DigitalInOut(board.D4)
 
@@ -25,6 +27,8 @@ class display:
 
         # Get drawing object to draw on image.
         self.draw = ImageDraw.Draw(self.image)
+
+       
 
     def displayText(self,text,x,y):
         # Draw Some Text
