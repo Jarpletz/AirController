@@ -30,22 +30,23 @@ class display:
 
        
 
-    def displayText(self,text,x,y):
+    def displayText(self,text,x,y):#Add text to image at coords (x,y)
         # Draw Some Text
         #(font_width, font_height) = font.getsize(text)
         font = ImageFont.load_default()
         self.draw.text((x,y),text, font=font, fill=255)
 
-    def clear(self):
+    def clear(self):#Erase everything on the oled
         # Clear display.
         self.oled.fill(0)
         self.oled.show()
-    def show(self):
+    def show(self):#display the current image
         # Display image
         self.oled.image(self.image)
         self.oled.show()
 
-screen=display()
+
+screen = display()
 screen.clear()
-screen.displayText("Hello World",0,16)
+screen. displayText("Hello there!",0,0)
 screen.show()
