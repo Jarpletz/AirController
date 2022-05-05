@@ -7,8 +7,7 @@ import adafruit_ssd1306
 
 class display:
 
-    def __init__(self):
-        print("hello")
+    def __init__(self):#setup everything
         # Define the Reset Pin
         oled_reset = digitalio.DigitalInOut(board.D4)
 
@@ -50,3 +49,4 @@ screen = display()
 screen.clear()
 screen. displayText("Hello there!",0,0)
 screen.show()
+print("Displayed 'Hello there!' on the OLED!")
