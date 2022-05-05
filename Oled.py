@@ -44,9 +44,10 @@ class display:
         self.oled.image(self.image)
         self.oled.show()
 
+#EXAMPLE:
 
-screen = display()
-screen.clear()
-screen. displayText("Hello there!",0,0)
-screen.show()
-print("Displayed 'Hello there!' on the OLED!")
+#screen = display()
+#screen.clear()
+#screen. displayText("Hello there!",0,0)
+#screen.show()
+#print("Displayed 'Hello there!' on the OLED!")

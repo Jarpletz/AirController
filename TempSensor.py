@@ -24,13 +24,13 @@ class tempSensor:
         return humidStr
 
 #EXAMPLE:
-sensor=tempSensor()
-while 1:
-    sensor.update() #update Data
-    print(sensor.getTempString()) #print Temp with formatting
-    print(sensor.getHumidString()) #print Humidity with formatting
-    print(" ")
-    time.sleep(1) 
+#sensor=tempSensor()
+#while 1:
+#    sensor.update() #update Data
+#    print(sensor.getTempString()) #print Temp with formatting
+#    print(sensor.getHumidString()) #print Humidity with formatting
+#    print(" ")
+#    time.sleep(1) 
 
 
 
