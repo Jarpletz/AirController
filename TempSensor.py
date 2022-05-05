@@ -12,7 +12,7 @@ class tempSensor:
         self.sht = adafruit_shtc3.SHTC3(i2c)
 
     def update(self):#update the temp data
-        self.temperature, self.humidity = sht.measurements
+        self.temperature, self.humidity = self.sht.measurements
         self.temperature=(self.temperature*1.8)+32 #CONVERTS TEMP TO F
 
     def getTempString(self):#Returns the temp. (in F) as string with formatting text
