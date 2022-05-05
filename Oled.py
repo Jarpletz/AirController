@@ -45,8 +45,7 @@ class display:
         self.oled.image(self.image)
         self.oled.show()
 
-def main():
-    screen=display()
-    screen.clear()
-    screen.displayText("Hello World",0,16)
-    screen.show()
+screen=display()
+screen.clear()
+screen.displayText("Hello World",0,16)
+screen.show()
