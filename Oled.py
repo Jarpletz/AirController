@@ -34,7 +34,7 @@ class display:
         # Draw Some Text
         #(font_width, font_height) = font.getsize(text)
         font = ImageFont.load_default()
-        self.draw.text(x,y,text, font=font, fill=255)
+        self.draw.text((x,y),text, font=font, fill=255)
 
     def clear(self):
         # Clear display.
