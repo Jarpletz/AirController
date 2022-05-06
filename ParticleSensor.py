@@ -1,11 +1,8 @@
 from pms7003 import Pms7003Sensor, PmsSensorException
 import time
-
+"""
 if __name__ == '__main__':
-
-    
-
-    while True:
+while True:
         try:
             info=sensor.read()
             print(info)
@@ -15,7 +12,7 @@ if __name__ == '__main__':
             print('Connection problem')
 
     sensor.close()
-
+"""
 
 class particleSensor:
     def __init__(self, *args, **kwargs):
@@ -35,5 +32,6 @@ class particleSensor:
 #EXAMPLE
 sensor =partcicleSensor()
 while 1:
+    sensor.update()
     print(sensor.info)
     time.sleep(1)
