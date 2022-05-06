@@ -32,7 +32,6 @@ class Manager:
 
     def displayOledParticleInfo(self): #Displays Air Quality Data on the OLED
         self.ssd.clear() #clear oled
-        self.ssd.oled.fill(0)
         self.ssd.displayText("Air Quality: Excellent",0,0)  #Header and state
         if self.useFan:
             self.ssd.displayText("Fan: On",0,12)
