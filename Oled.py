@@ -39,6 +39,7 @@ class display:
         # Clear display.
         self.oled.fill(0)
         self.oled.show()
+        print("Clearing")
     def show(self):#display the current image
         # Display image
         self.oled.image(self.image)

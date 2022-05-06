@@ -31,16 +31,13 @@ class Manager:
         self.ssd.show()    #show page
 
     def displayOledParticleInfo(self): #Displays Air Quality Data on the OLED
-
         self.ssd.clear() #clear oled
         self.ssd.displayText("Air Quality: Excellent",0,0)  #Header and state
         if self.useFan:
             self.ssd.displayText("Fan: On",0,12)
         else:
             self.ssd.displayText("Fan: OFf",0,12)
-
         #Display pms data
-
         self.ssd.show()
 
     def runOled(self):# Function called with threading that alternates between showing the temp and showing the Particle data on the oled every 5 sec.
