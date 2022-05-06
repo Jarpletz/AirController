@@ -46,8 +46,8 @@ class Manager:
             self.displayOledTempInfo()
             print("Temp info")
             time.sleep(5)
-            print("Particle info")
             self.displayOledParticleInfo()
+            print("Particle info")
             time.sleep(5)
 
 
