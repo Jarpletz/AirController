@@ -43,15 +43,7 @@ class display:
         # Display image
         self.oled.image(self.image)
         self.oled.show()
-
-
-    def showTempInfo(self,tempText,humidText,state):
-        clear()
-        displayText("Temperature & Humidity",0,0,)
-        displayText(tempText,0,8)
-        displayText(humidText,0,16)
-        if state == 0:
-            displayText("Holding temp between X and X",0,32)
+        
 
 
 
