@@ -47,7 +47,9 @@ class Manager:
         while(1):
             updateSensors()
             displayOledTempInfo()
+            print("Temp info")
             time.sleep(5)
+            print("Particle info")
             displayOledParticleInfo()
             time.sleep(5)
 
