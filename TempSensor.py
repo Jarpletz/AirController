@@ -10,6 +10,8 @@ class tempSensor:
     def __init__(self, *args, **kwargs):
         i2c = board.I2C()  # uses board.SCL and board.SDA
         self.sht = adafruit_shtc3.SHTC3(i2c)
+        self.temperature=45
+        self.humidity=45
 
     def update(self):#update the temp data
         self.temperature, self.humidity = self.sht.measurements
