@@ -26,17 +26,17 @@ class Manager:
     def displayOledTempInfo(self): #Displays temp and humid info on the OLED
         self.ssd.clear()   #clear
         self.ssd.displayText("Temperature & Humidity",0,0,)  #Header
-        self.ssd.displayText(self.sht.getTempString(),0,12)   #display temp
-        self.ssd.displayText(self.sht.getHumidString(),0,24) #display Humidity
+        self.ssd.displayText(self.sht.getTempString(),0,16)   #display temp
+        self.ssd.displayText(self.sht.getHumidString(),0,32) #display Humidity
         self.ssd.show()    #show page
 
     def displayOledParticleInfo(self): #Displays Air Quality Data on the OLED
         self.ssd.clear() #clear oled
         self.ssd.displayText("Air Quality: Excellent",0,0)  #Header and state
         if self.useFan:
-            self.ssd.displayText("Fan: On",0,12)
+            self.ssd.displayText("Fan: On",0,16)
         else:
-            self.ssd.displayText("Fan: OFf",0,12)
+            self.ssd.displayText("Fan: OFf",0,16)
         #Display pms data
         self.ssd.show()
 
