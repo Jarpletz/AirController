@@ -1,7 +1,13 @@
 import time
+import threading
 import ParticleSensor
 import TempSensor
 import Oled
+
+#TO ACCESS Manager Use this code:
+#include Manager
+# manager=Manager.manager
+# if manager.useFan: #do stuff
 
 class Manager:
     def __init__(self, *args, **kwargs):
@@ -17,16 +23,38 @@ class Manager:
         self.pms.update()
 
 
-    def displayOledTempInfo(self):
+    def displayOledTempInfo(self): #Displays temp and humid info on the OLED
         self.ssd.clear()   #clear
         self.ssd.displayText("Temperature & Humidity",0,0,)  #Header
         self.ssd.displayText(self.sht.getTempString(),0,9)   #display temp
         self.ssd.displayText(self.sht.getHumidString(),0,18) #display Humidity
         self.ssd.show()    #show page
 
-    def displayOledParticleInfo(self):
-        self.ssd.clear() #clear
+    def displayOledParticleInfo(self): #Displays Air Quality Data on the OLED
+        self.ssd.clear() #clear oled
         self.ssd.displayText("Air Quality: Excellent",0,0)  #Header and state
-        self.ssd
+        if self.useFan:
+            self.ssd.displayText("Fan: On",0,8)
+        else:
+            self.ssd.displayText("Fan: OFf",0,8)
+
+        #Display pms data
+
+        self.ssd.show()
+
+    def runOled(self):# Function called with threading that alternates between showing the temp and showing the Particle data on the oled every 5 sec.
+        while(1):
+            displayOledTempInfo()
+            time.sleep(5)
+            displayOledParticleInfo()
+            time.sleep(5)
+
+
+        
+
         
        
+manager=Manager()
+oledFunction= threading.Thread(target=manager.runOled, args=())
+oledFunction.start()
+
