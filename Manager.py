@@ -45,12 +45,12 @@ class Manager:
 
     def runOled(self):# Function called with threading that alternates between showing the temp and showing the Particle data on the oled every 5 sec.
         while(1):
-            updateSensors()
-            displayOledTempInfo()
+            self.updateSensors()
+            self.displayOledTempInfo()
             print("Temp info")
             time.sleep(5)
             print("Particle info")
-            displayOledParticleInfo()
+            self.displayOledParticleInfo()
             time.sleep(5)
 
 
