@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: Copyright (c) 2020 Bryan Siepert for Adafruit Industries
 #
 # SPDX-License-Identifier: MIT
-import time
+#import time
 import board
 import adafruit_shtc3
 
@@ -23,7 +23,7 @@ class tempSensor:
         humidStr=("Humidity: %0.1f %%" % self.humidity)
         return humidStr
 
-#EXAMPLE:
+#EXAMPLE:  (MUST uncomment 'Import Time')
 #sensor=tempSensor()
 #while 1:
 #    sensor.update() #update Data
