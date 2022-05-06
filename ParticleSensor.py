@@ -30,7 +30,7 @@ class particleSensor:
             print('WARNING: PMS7003 Connection problem')
 
 #EXAMPLE
-sensor =partcicleSensor()
+sensor =particleSensor()
 while 1:
     sensor.update()
     print(sensor.info)
