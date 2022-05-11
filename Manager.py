@@ -17,10 +17,17 @@ class Manager:
         
         self.useFan= False
 
+        self.updateFrequency=900 #the amount of time, in seconds, between each time sensor data is measured. Saves data every other measurement (900 sec= 15 min)
 
-    def updateSensors(self): #Updates data from temp and particle sensor
+
+    def updateSensors(self): #Updates data from temp and particle sensor using threading, saves data every other time
         self.sht.update()
         self.pms.update()
+        #self.saveData()
+        time.sleep(self.updateFrequency)
+        self.sht.update()
+        self.pms.update()
+        time.sleep(self.updateFrequency)
 
 
     def displayOledTempInfo(self): #Displays temp and humid info on the OLED
@@ -42,7 +49,6 @@ class Manager:
 
     def runOled(self):# Function called with threading that alternates between showing the temp and showing the Particle data on the oled every 5 sec.
         while(1):
-            self.updateSensors()
             self.displayOledTempInfo()
             print("Temp info")
             time.sleep(5)
