@@ -62,6 +62,8 @@ class Manager:
         
        
 manager=Manager()
+updateDataFunction= threading.Thread(target=manager.updateSensors, args=())
+updateDataFunction.start()
 oledFunction= threading.Thread(target=manager.runOled, args=())
 oledFunction.start()
 
