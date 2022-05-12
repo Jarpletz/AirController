@@ -2,6 +2,7 @@ import time
 import threading
 import ParticleSensor
 import TempSensor
+import SaveData
 import Oled
 
 #TO ACCESS Manager Use this code:
@@ -14,7 +15,10 @@ class Manager:
         self.ssd=Oled.display() #OLED
         self.sht=TempSensor.tempSensor() #Temp sensor
         self.pms=ParticleSensor.particleSensor() #Particle Sensor
-        
+
+        self.saveData=SaveData.saveData()
+        self.saveData.readData() #Data Saver class, Read data previously stored
+
         self.useFan= False
 
         self.updateFrequency=900 #the amount of time, in seconds, between each time sensor data is measured. Saves data every other measurement (900 sec= 15 min)
@@ -23,7 +27,7 @@ class Manager:
     def updateSensors(self): #Updates data from temp and particle sensor using threading, saves data every other time
         self.sht.update()
         self.pms.update()
-        #self.saveData()
+        self.saveData.uploadData(self)
         time.sleep(self.updateFrequency)
         self.sht.update()
         self.pms.update()
