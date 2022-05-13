@@ -12,7 +12,7 @@ class saveData:
 
         self.readData()
 
-    def saveData(self):#saves all temp data to file at path
+    def save(self):#saves all temp data to file at path
         with open(self.filePath, 'w') as outfile:
            json.dumps(self.__dict__, outfile)
         
@@ -25,6 +25,11 @@ class saveData:
         self.temps.append(Manager.sht.temperature)
         self.humids.append(Manager.sht.humidity)
 
-        self.saveData()
+        self.save()
 
-
+data= saveData()
+data.readData()
+for i in Range(0,10):
+    data.times.append(time.ctime())
+    data.temps.append(i)
+    data.humids.append(i)
