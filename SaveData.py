@@ -27,9 +27,4 @@ class saveData:
 
         self.save()
 
-data= saveData()
-data.readData()
-for i in Range(0,10):
-    data.times.append(time.ctime())
-    data.temps.append(i)
-    data.humids.append(i)
+

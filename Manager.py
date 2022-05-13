@@ -18,8 +18,8 @@ class Manager:
         self.sht=TempSensor.tempSensor() #Temp sensor
         self.pms=ParticleSensor.particleSensor() #Particle Sensor
 
-        self.saveData=SaveData.saveData()
-        self.saveData.readData() #Data Saver class, Read data previously stored
+        self.saver=SaveData.saveData()
+        self.saver.readData() #Data Saver class, Read data previously stored
 
         self.useFan= False
 
@@ -29,11 +29,12 @@ class Manager:
     def updateSensors(self): #Updates data from temp and particle sensor using threading, saves data every other time
         self.sht.update()
         self.pms.update()
-        self.saveData.uploadData(self)
-        time.sleep(self.updateFrequency)
+	#Update  Sensors
+        self.saver.uploadData(self) #Save Data
+        time.sleep(self.updateFrequency) #delay
         self.sht.update()
-        self.pms.update()
-        time.sleep(self.updateFrequency)
+        self.pms.update() #Update Sensors
+        time.sleep(self.updateFrequency) # Delay
 
 
     def displayOledTempInfo(self): #Displays temp and humid info on the OLED

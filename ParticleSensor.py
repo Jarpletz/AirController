@@ -29,6 +29,9 @@ class particleSensor:
             stateOfAir10 = False
         print (stateOfAir10)
         print (StateOfAir2_5)
+object= particleSensor()
+object.update(object)
+object.goodOrBad(object)
 #EXAMPLE sensor =particleSensor() while#    sensor.update()
 #    print(sensor.info)
 #    time.sleep(1)
