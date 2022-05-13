@@ -10,6 +10,8 @@ import Oled
 # manager=Manager.manager
 # if manager.useFan: #do stuff
 
+# Git Access token: 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
+
 class Manager:
     def __init__(self, *args, **kwargs):
         self.ssd=Oled.display() #OLED
