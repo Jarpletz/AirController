@@ -4,6 +4,8 @@ from pms7003 import Pms7003Sensor, PmsSensorException
 class particleSensor:
     def __init__(self, *args, **kwargs):
         self.sensor = Pms7003Sensor('/dev/serial0') #initialize sensor object
+        self.pm2_5=0
+        self.pm10=0
 
     def update(self):
         try:
@@ -17,16 +19,16 @@ class particleSensor:
         except PmsSensorException: print('WARNING: PMS7003 Connection problem')
 
     def goodOrBad(self):
-       if self.pm2_=<13 && self.pm2_5>4:
-	    stateOfAir2.5 = True
-       else:
-	    stateOfAir2.5 =False
-       if self.pm10 <= 50:
-	    stateOfAir10 = True
-       else:
-	    stateOfAir10 = False
-       print stateOfAir10
-       print StateOfAir2.5
+        if self.pm2_5<14 and self.pm2_5>4:
+            stateOfAir2_5 = True
+        else:
+            stateOfAir2_5 = False
+        if self.pm10 <= 50:
+            stateOfAir10 = True
+        else:
+            stateOfAir10 = False
+        print (stateOfAir10)
+        print (StateOfAir2_5)
 #EXAMPLE sensor =particleSensor() while#    sensor.update()
 #    print(sensor.info)
 #    time.sleep(1)
