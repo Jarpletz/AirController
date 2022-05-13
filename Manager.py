@@ -21,7 +21,7 @@ class Manager:
 
         self.useFan= False
 
-        self.updateFrequency=900 #the amount of time, in seconds, between each time sensor data is measured. Saves data every other measurement (900 sec= 15 min)
+        self.updateFrequency=5 #the amount of time, in seconds, between each time sensor data is measured. Saves data every other measurement (900 sec= 15 min)
 
 
     def updateSensors(self): #Updates data from temp and particle sensor using threading, saves data every other time
