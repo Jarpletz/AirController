@@ -6,6 +6,9 @@ class particleSensor:
         self.sensor = Pms7003Sensor('/dev/serial0') #initialize sensor object
         self.pm2_5=0
         self.pm10=0
+        stateOfAir10 = True
+        stateOfAir2_5= True
+
 
     def update(self):
         try:
@@ -27,11 +30,9 @@ class particleSensor:
             stateOfAir10 = True
         else:
             stateOfAir10 = False
-        print (stateOfAir10)
-        print (StateOfAir2_5)
-object= particleSensor()
-object.update(object)
-object.goodOrBad(object)
+object = particleSensor()
+object.update()
+object.goodOrBad()
 #EXAMPLE sensor =particleSensor() while#    sensor.update()
 #    print(sensor.info)
 #    time.sleep(1)

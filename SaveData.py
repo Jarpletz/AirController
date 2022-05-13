@@ -1,4 +1,4 @@
-import Manager
+import os
 import json
 import time
 
@@ -17,7 +17,9 @@ class saveData:
            json.dumps(self.__dict__, outfile)
         
     def readData(self): #Reads all climate data from file at path
-        with open(self,filePath) as f:
+        if os.path.exists(self.filePath) == False:
+               return
+        with open(self.filePath,'r') as f:
             self = json.loads(f)
 
     def uploadData(self, Manager): #add current climate data to list and save

@@ -64,13 +64,11 @@ class Manager:
             time.sleep(5)
 
 
-        
 
-        
-       
+
+
 manager=Manager()
-updateDataFunction= threading.Thread(target=manager.updateSensors, args=())
-updateDataFunction.start()
-oledFunction= threading.Thread(target=manager.runOled, args=())
-oledFunction.start()
+threading.Thread(target=manager.updateSensors).start()
+threading.Thread(target=manager.runOled).start()
+
 
