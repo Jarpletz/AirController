@@ -4,6 +4,7 @@ import ParticleSensor
 import TempSensor
 import SaveData
 import Oled
+import Relay
 
 #TO ACCESS Manager Use this code:
 #include Manager
@@ -16,11 +17,14 @@ class Manager:
         self.ssd=Oled.display() #OLED
         self.sht=TempSensor.tempSensor() #Temp sensor
         self.pms=ParticleSensor.particleSensor() #Particle Sensor
+        self.fan=Relay.relay() #Relay object
 
         self.saver=SaveData.saveData()
         self.saver.readData() #Data Saver class, Read data previously stored
 
-        self.useFan= False
+        self.useFan= False #True if fan on, False if fan off
+        self.override=False #True if should override sensor data for fan
+        self.overrideTime=0 #Time, in seconds, the sensor data should be overridden for fan
 
         self.updateFrequency=5 #the amount of time, in seconds, between each time sensor data is measured. Saves data every other measurement (900 sec= 15 min)
 
@@ -30,10 +34,8 @@ class Manager:
         self.pms.update()
 	#Update  Sensors
         self.saver.uploadData(self) #Save Data
+        self.updateFanSensor()
         time.sleep(self.updateFrequency) #delay
-        self.sht.update()
-        self.pms.update() #Update Sensors
-        time.sleep(self.updateFrequency) # Delay
 
 
     def displayOledTempInfo(self): #Displays temp and humid info on the OLED
@@ -50,6 +52,10 @@ class Manager:
             self.ssd.displayText("Fan: On",0,16)
         else:
             self.ssd.displayText("Fan: OFf",0,16)
+        self.ssd.displayText(("# Particles 2.5um:",self.pms.pm2_5),0,35) #Display Particle Quantities
+        self.ssd.displayText(("# Particles 10um:",self.pms.pm10),0,51)
+
+
         #Display pms data
         self.ssd.show()
 
@@ -61,6 +67,19 @@ class Manager:
             self.displayOledParticleInfo()
             print("Particle info")
             time.sleep(5)
+
+    def updateFanSensor(self): #uses PMS sensor to turn fan on or off. does not run if override is on.
+        if self.override== True: return
+
+        badAir= self.pms.goodOrBad()
+
+        if badAir == True:
+            self.useFan=True
+        else:
+            self.useFan=False
+
+        self.fan.run(useFan)
+
 
 
 
