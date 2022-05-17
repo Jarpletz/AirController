@@ -13,14 +13,19 @@ class saveData:
         self.readData()
 
     def save(self):#saves all temp data to file at path
-        with open(self.filePath, 'w') as outfile:
-           json.dumps(self.__dict__, outfile)
-        
+        jsonStr=json.dumps(self.__dict__)
+        f=open(self.filePath,"w")
+        f.write(jsonStr)
+        f.close()
+        print("Saving Data")
+
+
     def readData(self): #Reads all climate data from file at path
         if os.path.exists(self.filePath) == False:
                return
         with open(self.filePath,'r') as f:
-            self = json.loads(f)
+            #self = json.loads(str(f))
+            self.__dict__= json.loads(str(f), object_hook=lambda d: SimpleNamespace(**d))
 
     def uploadData(self, Manager): #add current climate data to list and save
         self.times.append(time.ctime())

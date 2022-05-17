@@ -4,13 +4,13 @@ import Manager
 
 class relay:
     def run(OnOff):
-        if OnOff==True:
-                GPIO.output(pin, GPIO.HIGH)
-                time.sleep(1)
+        if OnOff==False:
+                GPIO.output(self.pin, self.GPIO.HIGH)
+                #time.sleep(1)
         else:
-                GPIO.output(pin. GPIO.LOW)
-                time.sleep(1)
-    def __init_(self, OnOff):
+                GPIO.output(self.pin. self.GPIO.LOW)
+                #time.sleep(1)
+    def __init_(self):
         self.pin=37
         self.GPIO.setmode(GPIO.BOARD)
-        self.GPIO.setup(pin, GPIO.OUT)
+        self.GPIO.setup(self.pin, self.GPIO.OUT)

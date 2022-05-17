@@ -22,7 +22,7 @@ class particleSensor:
         except PmsSensorException: print('WARNING: PMS7003 Connection problem')
 
     def goodOrBad(self):
-        if self.pm2_5<14 and self.pm2_5>4:
+        if self.pm2_5<14 and self.pm2_5 >4 :
             stateOfAir2_5 = True
         else:
             stateOfAir2_5 = False
@@ -30,9 +30,10 @@ class particleSensor:
             stateOfAir10 = True
         else:
             stateOfAir10 = False
-object = particleSensor()
-object.update()
-object.goodOrBad()
+        if stateOfAir2_5 == True and stateOfAir10 == True:
+            return  True
+        else:
+             return  False
 #EXAMPLE sensor =particleSensor() while#    sensor.update()
 #    print(sensor.info)
 #    time.sleep(1)
