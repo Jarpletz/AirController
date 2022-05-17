@@ -4,7 +4,7 @@ import Manager
 
 class relay:
     def run(OnOff):
-        if OnOff==true:
+        if OnOff==True:
                 GPIO.output(pin, GPIO.HIGH)
                 time.sleep(1)
         else:
