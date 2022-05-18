@@ -70,7 +70,7 @@ class Manager:
             time.sleep(5)
 
     def countdownOverrideTimer(self):
-        if self.overrideTime<=0: return
+        if self.overrideLeft<=0: return
 
         if time.time() >= self.previousTime +1:#if one second has passed
             self.overrideTime-=1
@@ -83,7 +83,7 @@ class Manager:
 
 
     def updateFanSensor(self): #uses PMS sensor to turn fan on or off. does not run if override is on.
-        if self.overrideTime>0: return
+        if self.overrideLeft>0: return
 
         badAir= self.pms.goodOrBad()
 
@@ -92,7 +92,7 @@ class Manager:
         else:
             self.useFan=False
 
-        self.fan.run(useFan)
+        self.fan.run(self.useFan)
 
    
 
