@@ -7,12 +7,12 @@ class relay:
         GPIO.setmode(GPIO.BOARD)
         GPIO.setup(self.pin, GPIO.OUT)
 
-     def run(self,OnOff):
         if OnOff==False:
-                #GPIO.output(self.pin, GPIO.HIGH)
-                print(self.pin)
+                GPIO.output(self.pin, GPIO.HIGH)
+                print("Relay HIGH")
                 #time.sleep(1)
         else:
                 GPIO.output(self.pin, GPIO.LOW)
+                print("Relay LOW")
                 #time.sleep(1)
    
