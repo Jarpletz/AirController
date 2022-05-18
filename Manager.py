@@ -19,8 +19,8 @@ class Manager:
         self.pms=ParticleSensor.particleSensor() #Particle Sensor
         self.fan=Relay.relay() #Relay object
 
-        self.saver=SaveData.saveData()
-        self.saver.readData() #Data Saver class, Read data previously stored
+        #self.saver=SaveData.saveData()
+        #self.saver.readData() #Data Saver class, Read data previously stored
 
         self.useFan= False #True if fan on, False if fan off
         self.override=False #True if should override sensor data for fan
@@ -33,7 +33,7 @@ class Manager:
         self.sht.update()
         self.pms.update()
 	#Update  Sensors
-        self.saver.uploadData(self) #Save Data
+        #self.saver.uploadData(self) #Save Data
         self.updateFanSensor()
         time.sleep(self.updateFrequency) #delay
 

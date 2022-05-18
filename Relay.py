@@ -1,6 +1,5 @@
 import time
 import RPi.GPIO as GPIO
-import Manager
 
 class relay:
     def run(OnOff):
