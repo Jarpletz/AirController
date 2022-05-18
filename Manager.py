@@ -23,8 +23,9 @@ class Manager:
         #self.saver.readData() #Data Saver class, Read data previously stored
 
         self.useFan= False #True if fan on, False if fan off
-        self.override=False #True if should override sensor data for fan
-        self.overrideTime=0 #Time, in seconds, the sensor data should be overridden for fan
+        self.overrideAmount=900 # time, in seconds, the override will last
+        self.overrideLeft=0 #Time left, in seconds, during which the sensor data should be overridden for fan
+        self.previousTime=time.time() #a way to keep track of the time passed per frame
 
         self.updateFrequency=5 #the amount of time, in seconds, between each time sensor data is measured. Saves data every other measurement (900 sec= 15 min)
 
@@ -68,8 +69,21 @@ class Manager:
             print("Particle info")
             time.sleep(5)
 
+    def countdownOverrideTimer(self):
+        if self.overrideTime<=0: return
+
+        if time.time() >= self.previousTime +1:#if one second has passed
+            self.overrideTime-=1
+            self.previousTime=time.time()
+
+    def updateFanOverride(self):#Override the current fan settings for overrideAmount seconds.
+        self.overrideLeft=self.overrideAmount
+        self.useFan=not self.useFan
+        self.fan.run(self.useFan)
+
+
     def updateFanSensor(self): #uses PMS sensor to turn fan on or off. does not run if override is on.
-        if self.override== True: return
+        if self.overrideTime>0: return
 
         badAir= self.pms.goodOrBad()
 
@@ -80,6 +94,7 @@ class Manager:
 
         self.fan.run(useFan)
 
+   
 
 
 
@@ -89,4 +104,5 @@ manager=Manager()
 threading.Thread(target=manager.updateSensors).start()
 threading.Thread(target=manager.runOled).start()
 
-
+while 1:
+    manager.countdownOverrideTimer()
