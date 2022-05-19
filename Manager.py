@@ -2,7 +2,7 @@ import time
 import threading
 import ParticleSensor
 import TempSensor
-import SaveData
+#import SaveData
 import Oled
 import Relay
 
@@ -19,22 +19,22 @@ class Manager:
         self.pms=ParticleSensor.particleSensor() #Particle Sensor
         self.fan=Relay.relay() #Relay object
 
-        self.saver=SaveData.saveData()
-        self.saver.readData() #Data Saver class, Read data previously stored
-
+        #self.saver=SaveData.saveData()
+        #self.saver.readData() #Data Saver class, Read data previously stored
+        
         self.useFan= False #True if fan on, False if fan off
         self.overrideAmount=900 # time, in seconds, the override will last
         self.overrideLeft=0 #Time left, in seconds, during which the sensor data should be overridden for fan
         self.previousTime=time.time() #a way to keep track of the time passed per frame
 
-        self.updateFrequency=5 #the amount of time, in seconds, between each time sensor data is measured. Saves data every other measurement (900 sec= 15 min)
+        self.updateFrequency=900 #the amount of time, in seconds, between each time sensor data is measured. Saves data every other measurement (900 sec= 15 min)
 
 
     def updateSensors(self): #Updates data from temp and particle sensor using threading, saves data every other time
         self.sht.update()
         self.pms.update()
 	#Update  Sensors
-        self.saver.uploadData(self) #Save Data
+        #self.saver.uploadData(self) #Save Data
         self.updateFanSensor()
         time.sleep(self.updateFrequency) #delay
 
