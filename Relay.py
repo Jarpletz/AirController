@@ -3,11 +3,11 @@ import RPi.GPIO as GPIO
 
 class relay:
      def __init__(self):
-        self.pin=37
-        GPIO.setmode(GPIO.BOARD)
+        self.pin=6
+        GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.pin, GPIO.OUT)
-
-        if OnOff==False:
+     def run(self,OnOff):
+        if OnOff==True:
                 GPIO.output(self.pin, GPIO.HIGH)
                 print("Relay HIGH")
                 #time.sleep(1)

@@ -19,8 +19,8 @@ class Manager:
         self.pms=ParticleSensor.particleSensor() #Particle Sensor
         self.fan=Relay.relay() #Relay object
 
-        #self.saver=SaveData.saveData()
-        #self.saver.readData() #Data Saver class, Read data previously stored
+        self.saver=SaveData.saveData()
+        self.saver.readData() #Data Saver class, Read data previously stored
 
         self.useFan= False #True if fan on, False if fan off
         self.overrideAmount=900 # time, in seconds, the override will last
@@ -34,7 +34,7 @@ class Manager:
         self.sht.update()
         self.pms.update()
 	#Update  Sensors
-        #self.saver.uploadData(self) #Save Data
+        self.saver.uploadData(self) #Save Data
         self.updateFanSensor()
         time.sleep(self.updateFrequency) #delay
 
@@ -48,13 +48,17 @@ class Manager:
 
     def displayOledParticleInfo(self): #Displays Air Quality Data on the OLED
         self.ssd.clear() #clear oled
-        self.ssd.displayText("Air Quality: Excellent",0,0)  #Header and state
-        if self.useFan:
-            self.ssd.displayText("Fan: On",0,16)
+        if self.pms.goodOrBad() ==True:
+                self.ssd.displayText("Air Quality: Poor",0,0)
         else:
-            self.ssd.displayText("Fan: OFf",0,16)
-        self.ssd.displayText(("# Particles 2.5um:",self.pms.pm2_5),0,35) #Display Particle Quantities
-        self.ssd.displayText(("# Particles 10um:",self.pms.pm10),0,51)
+                self.ssd.displayText("Air Quality: Excellent",0,0)  #Header and state
+        if self.useFan:
+                self.ssd.displayText("Fan: On",0,16)
+        else:
+                self.ssd.displayText("Fan: OFf",0,16)
+
+        self.ssd.displayText(("# Part. 2.5um: "+str(self.pms.pm2_5)),0,35) #Display Particle Quantities
+        self.ssd.displayText(("# Part. 10um: "+str(self.pms.pm10)),0,51)
 
 
         #Display pms data
@@ -85,7 +89,7 @@ class Manager:
     def updateFanSensor(self): #uses PMS sensor to turn fan on or off. does not run if override is on.
         if self.overrideLeft>0: return
 
-        badAir= self.pms.goodOrBad()
+        badAir=not  self.pms.goodOrBad()
 
         if badAir == True:
             self.useFan=True
@@ -95,8 +99,6 @@ class Manager:
         self.fan.run(self.useFan)
 
    
-
-
 
 
 
