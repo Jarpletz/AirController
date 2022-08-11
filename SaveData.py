@@ -1,5 +1,7 @@
 import os
 import json
+from collections import namedtuple
+from json import JSONEncoder
 import time
 
 class saveData:
@@ -18,20 +20,22 @@ class saveData:
         f.write(jsonStr)
         f.close()
         print("Saving Data")
-
+	
+    def customDecoder(dataDict):
+        return namedtuple('X',dataDict.keys())(*dataDict.values())
 
     def readData(self): #Reads all climate data from file at path
         if os.path.exists(self.filePath) == False:
                return
         with open(self.filePath,'r') as f:
-            #self = json.loads(str(f))
-            self.__dict__= json.loads(str(f), object_hook=lambda d: SimpleNamespace(**d))
-
+            self = json.loads(str(f),object_hook=self.customDecoder)
+            
     def uploadData(self, Manager): #add current climate data to list and save
         self.times.append(time.ctime())
         self.temps.append(Manager.sht.temperature)
         self.humids.append(Manager.sht.humidity)
 
         self.save()
+
 
 

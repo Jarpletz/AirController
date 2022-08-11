@@ -2,7 +2,7 @@ import time
 import threading
 import ParticleSensor
 import TempSensor
-import SaveData
+#import SaveData
 import Oled
 import Relay
 
@@ -21,13 +21,13 @@ class Manager:
 
         #self.saver=SaveData.saveData()
         #self.saver.readData() #Data Saver class, Read data previously stored
-
+        
         self.useFan= False #True if fan on, False if fan off
         self.overrideAmount=900 # time, in seconds, the override will last
         self.overrideLeft=0 #Time left, in seconds, during which the sensor data should be overridden for fan
         self.previousTime=time.time() #a way to keep track of the time passed per frame
 
-        self.updateFrequency=5 #the amount of time, in seconds, between each time sensor data is measured. Saves data every other measurement (900 sec= 15 min)
+        self.updateFrequency=900 #the amount of time, in seconds, between each time sensor data is measured. Saves data every other measurement (900 sec= 15 min)
 
 
     def updateSensors(self): #Updates data from temp and particle sensor using threading, saves data every other time
@@ -48,13 +48,17 @@ class Manager:
 
     def displayOledParticleInfo(self): #Displays Air Quality Data on the OLED
         self.ssd.clear() #clear oled
-        self.ssd.displayText("Air Quality: Excellent",0,0)  #Header and state
-        if self.useFan:
-            self.ssd.displayText("Fan: On",0,16)
+        if self.pms.goodOrBad() ==True:
+                self.ssd.displayText("Air Quality: Poor",0,0)
         else:
-            self.ssd.displayText("Fan: OFf",0,16)
-        self.ssd.displayText(("# Particles 2.5um:",self.pms.pm2_5),0,35) #Display Particle Quantities
-        self.ssd.displayText(("# Particles 10um:",self.pms.pm10),0,51)
+                self.ssd.displayText("Air Quality: Excellent",0,0)  #Header and state
+        if self.useFan:
+                self.ssd.displayText("Fan: On",0,16)
+        else:
+                self.ssd.displayText("Fan: OFf",0,16)
+
+        self.ssd.displayText(("# Part. 2.5um: "+str(self.pms.pm2_5)),0,35) #Display Particle Quantities
+        self.ssd.displayText(("# Part. 10um: "+str(self.pms.pm10)),0,51)
 
 
         #Display pms data
@@ -85,7 +89,7 @@ class Manager:
     def updateFanSensor(self): #uses PMS sensor to turn fan on or off. does not run if override is on.
         if self.overrideLeft>0: return
 
-        badAir= self.pms.goodOrBad()
+        badAir=not  self.pms.goodOrBad()
 
         if badAir == True:
             self.useFan=True
@@ -95,8 +99,6 @@ class Manager:
         self.fan.run(self.useFan)
 
    
-
-
 
 
 
